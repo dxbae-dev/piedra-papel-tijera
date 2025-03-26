@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="content">
+      <!-- Información y puntajes -->
+      <div class="information">
+        <h1 class="title">🚀 Piedra Papel o Tijera</h1>
+
+        <div class="scores">
+          <p class="plays">
+            <i class="ri-gamepad-fill"></i>
+            <span class="play">0</span>
+          </p>
+          <p class="score">
+            <i class="ri-user-fill"></i>
+            <span id="user-score">0</span>
+          </p>
+          <p class="score">
+            <i class="ri-computer-fill"></i>
+            <span id="computer-score">0</span>
+          </p>
+          <p class="score">
+            <i class="ri-percent-fill"></i>
+            <span id="porcent">0%</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Juego -->
+      <div class="game">
+        <div class="user-game">
+          <button class="option" id="rock">
+            <img src="img/rock.png" alt="Piedra" />
+          </button>
+          <button class="option" id="paper">
+            <img src="img/paper.png" alt="Papel" />
+          </button>
+          <button class="option" id="scissors">
+            <img src="img/scissors.png" alt="Tijera" />
+          </button>
+        </div>
+
+        <div class="computer-game">
+          <img src="img/hand-closed.png" alt="Elección de la Computadora" />
+        </div>
+      </div>
+
+      <!-- Toast de resultado -->
+      <div id="toast" class="toast">
+        <i id="toast-icon" class="ri-notification-line"></i>
+        <span id="toast-message"></span>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

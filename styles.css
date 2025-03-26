@@ -1,0 +1,441 @@
+/* Definición de variables de colores y otros valores */
+:root {
+  --primary-color: #4caf50; /* Verde para victoria */
+  --secondary-color: #f44336; /* Rojo para derrota */
+  --neutral-color: #a3a3a3; /* Color de fondo general */
+  --main-color: #113ac0; /* Color principal (verde) */
+  --text-color: #363636; /* Color de texto oscuro */
+  --background-color: #c5c5c5; /* Color de fondo general */
+  --border-color: #080808; /* Color de borde */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra */
+  --shake-animation-time: 0.6s; /* Duración de la animación de sacudida */
+  --max-width: 600px; /* Ancho máximo para contenedores */
+  --padding: 20px; /* Padding para la mayoría de contenedores */
+  --border-radius: 15px; /* Bordes redondeados */
+  --option-size: 100px;
+}
+
+/* Reset básico para que todo esté en su lugar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  padding: var(--padding);
+  overflow: hidden;
+  background-color: var(--neutral-color);
+}
+
+/* Fondo independiente para el cambio de color */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: background-color 0.5s ease-in-out;
+}
+
+/* Contenedor general para el contenido */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+/* Información de puntajes */
+.information {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: var(--padding);
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 15px var(--shadow-color);
+}
+
+.title {
+  color: var(--text-color);
+  text-align: center;
+}
+
+.scores {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.scores p {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  font-size: 1.2rem;
+  background-color: var(--main-color); /* Usar main color para el fondo */
+  color: var(--background-color);
+}
+
+.score i {
+  color: var(--background-color);
+}
+
+.scores i {
+  margin-right: 10px;
+  font-size: 1.5rem;
+  color: var(--background-color);
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+/* Estilos del juego */
+.game {
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 15px var(--text-color);
+  padding: 30px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+.user-game {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.option {
+  background-color: var(--white-color);
+  border: 3px solid var(--border-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--option-size);
+  height: var(--option-size);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.option:hover {
+  transform: scale(1.15);
+  border-color: var(--main-color); /* Color de borde en hover */
+  box-shadow: 0 8px 15px rgba(0, 123, 255, 0.2);
+}
+
+.option img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.computer-game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.computer-game img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-top: 20px;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 1000px) {
+  body {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .information {
+    width: 100%;
+  }
+
+  .scores {
+    width: 100%;
+  }
+
+  .score,
+  .plays {
+    width: 100%;
+  }
+
+  .score p,
+  .plays p {
+    font-size: 0.5rem;
+  }
+
+  .game {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+
+  .user-game {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .option {
+    width: 80px;
+    height: 80px;
+  }
+
+  .option img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .toast.show {
+    bottom: 0;
+  }
+}
+
+/* Animación para la pelea */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shake {
+  animation: shake var(--shake-animation-time) ease-in-out;
+}
+
+/* Estilos para el Toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  width: 200px;
+  text-align: center;
+  transform: translateX(-50%);
+  background-color: var(--background-color);
+  color: var(--border-color);
+  padding: 20px 40px;
+  border: 2px solid var(--text-color);
+  border-radius: 15px;
+  display: none; /* Inicialmente oculto */
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out;
+}
+
+.toast.show {
+  display: flex;
+  opacity: 1;
+  bottom: 80px;
+}
+
+.toast i {
+  font-size: 20px;
+}
+
+/* Añadir colores específicos para cada resultado */
+.toast.win {
+  background-color: #8bdd8e; /* Verde para victoria */
+}
+
+.toast.lose {
+  background-color: #df908a; /* Rojo para derrota */
+}
+
+.toast.draw {
+  background-color: var(--neutral-color); /* Gris para empate */
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  body {
+    width: 100%;
+    padding: 10px;
+    justify-content: flex-start;
+  }
+
+  .information {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .scores {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .score,
+  .plays {
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    font-size: 0.9rem;
+  }
+
+  .score p,
+  .plays p {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .game {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    height: max-content;
+    align-items: center;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .user-game {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .option {
+    width: 70px;
+    height: 70px;
+  }
+
+  .option img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .computer-game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .computer-game img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .toast {
+    width: 50%;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .toast i {
+    font-size: 18px;
+  }
+}
+
+/* Estilos para pantallas más pequeñas (móviles muy compactos) */
+@media (max-width: 480px) {
+  body {
+    justify-content: center;
+  }
+
+  .information {
+    padding: 8px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .scores {
+    gap: 8px;
+  }
+
+  .score,
+  .plays {
+    font-size: 0.8rem;
+  }
+
+  .game {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .option {
+    width: 90px;
+    height: 90px;
+  }
+
+  .option img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .computer-game img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .toast {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .toast i {
+    font-size: 1.2rem;
+  }
+}
